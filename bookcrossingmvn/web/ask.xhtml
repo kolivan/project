@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+    <ui:composition template="/templates/common.xhtml">
+        <ui:define name="content">
+
+            <h:form>
+                <p:growl id="askGrowl" showDetail="true" />
+
+                <p:panel id="askPnl" header="Create new ask" style="margin-top:10px">
+                    <p:messages id="messages" showDetail="true" />
+                    <h:panelGrid columns="3" id="askGrid" cellpadding="5">
+
+                        <h:outputText for="titleInput" value="Title: *" />
+                        <p:inputText size="100" id="titleInput" value="#{questionBean.question.questionTitle}" required="true" label="Title"/>
+                        <p:message for="titleInput" />
+
+                        <h:outputText for="askTextInput" value="Text: *" />
+                        <p:inputTextarea rows="6" cols="100" id="askTextInput" value="#{questionBean.question.questionText}" required="true" label="Text"/>
+                        <p:message for="askTextInput" />
+
+                        <h:outputLabel for="menu" value="Choose sections: *" />
+                        <p:selectCheckboxMenu id="menu" value="#{questionBean.selectedSections}" label="Sections" filter="true" filterMatchMode="startsWith" >
+                            <f:selectItems value="#{questionBean.sections}" />
+                        </p:selectCheckboxMenu>
+
+                        <!--<h:panelGrid columns="3" cellpadding="5">-->
+
+                        <!--</h:panelGrid>-->
+
+                    </h:panelGrid>
+
+                    <p:commandButton type="submit" value="Create" icon="ui-icon-check" action="#{questionBean.createQuestion}" update="askGrowl askGrid" oncomplete="handleForm(xhr, status, args)"/>
+                </p:panel>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

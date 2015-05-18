@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/security/tags ">
+<h:head>
+
+</h:head>
+
+<body style="background-color: aqua">
+
+<ui:composition>
+    <h:form >
+        <p:menubar   model="#{homeBean.menuModel}" style="background-color: coral">
+            <f:facet name="options">
+                <p:growl   id="askGrowl"   showDetail="true" />
+
+                <p:inputText style="margin-right:10px" placeholder="Search" value="#{homeBean.searchInputValue}"/>
+
+                <p:commandButton type="submit" value="Search" icon="ui-icon-search" style="background-color: rosybrown" action="#{homeBean.searchData}"/>
+                <c:if test="#{homeBean.hasUserRole()}">
+                    <p:commandButton type="submit" value="Log out" action="#{loginBean.logout}"/>
+                </c:if>
+
+                <p:commandButton type="submit" value="Top" style="background-color: rosybrown" action="#{homeBean.showTop}"  />
+
+                <c:if test="#{homeBean.isAnonymous()}">
+                    <p:commandButton type="button" value="Login" style="background-color: rosybrown" onclick="PF('dlg').show();"/>
+                </c:if>
+                <p:commandButton type="submit" value="Registrate" style="background-color: rosybrown" action="#{homeBean.showRegistrate}"/>
+            </f:facet>
+        </p:menubar>
+    </h:form>
+    <p:dialog widgetVar="dlg" header="Authorization" minHeight="40" minWidth="130" position="right top"
+              style="margin-top: 29px;margin-right: 8px; background-color: antiquewhite">
+        <h:form>
+            <p:growl id="loginGrowl" showDetail="true"/>
+            <p:panel id="loginPanel">
+                <h:panelGrid columns="3" id="loginGrid" cellpadding="5">
+                    <p:inputText id="usernameLoginInput" value="#{loginBean.userName}" required="true"
+                                 label="Username"/>
+                    <br/>
+                    <p:watermark for="usernameLoginInput" value="Username" id="watermarkUsernameLoginInput"/>
+                    <p:password id="usernamePasswordInput" value="#{loginBean.password}" required="true"
+                                label="Password"/>
+                    <p:watermark for="usernamePasswordInput" value="Password" id="watermarkUsernamePasswordInput"/>
+                </h:panelGrid>
+
+                <p:commandButton type="submit" value="Login" style="margin-top: 7px;background-color: rosybrown"  icon="ui-icon-check"
+                                 action="#{loginBean.login}"/>
+            </p:panel>
+        </h:form>
+    </p:dialog>
+</ui:composition>
+</body>
+</html>

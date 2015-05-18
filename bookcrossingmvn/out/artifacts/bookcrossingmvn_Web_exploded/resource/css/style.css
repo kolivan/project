@@ -1,0 +1,35 @@
+#footer
+{
+    background: gray;
+    width: 600px;
+    margin: 20px auto;
+    font-family: "Verdana";
+    text-align: center;
+    font-size: 15px;
+    color: #FFF;
+    padding: 10px;
+    font-weight: bold;
+}
+#footer div
+{
+    float: left;
+}
+.section
+{
+    text-align: left;
+    width: 180px;
+    margin: 10px 0px 10px 0px;
+    padding: 10px;
+}
+.red
+{
+    background: red;
+}
+.green
+{
+    background: green;
+}
+.blue
+{
+    background: blue;
+}

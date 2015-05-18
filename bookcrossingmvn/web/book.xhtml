@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+    <title></title>
+</head>
+<h:body>
+<ui:composition template="/templates/common.xhtml">
+<ui:define name="content">
+
+    <h:form>
+
+        <p:growl id="growl" showDetail="true" />
+
+        <p:panel id="pnl" header="Add new book" style="margin-top:10px">
+            <p:messages id="messages" showDetail="true" />
+            <h:panelGrid columns="3" id="grid" cellpadding="5">
+
+                <h:outputText for="nameInput" value="book: *" />
+                <p:inputText size="20" id="nameInput" value="#{bookBean.book.name} " required="true" label="book"/>
+                <p:message for="nameInput" />
+
+                <h:outputText for="languageInput" value="language: *" />
+                <p:inputText size="20" id="languageInput" value="#{bookBean.book.language} " required="true" label="language"/>
+                <p:message for="languageInput" />
+
+            </h:panelGrid>
+            <h:commandButton type="submit" value="ADD" icon="ui-icon-check" action="#{bookBean.createBook}" update="growl grid" oncomplete="handleForm(xhr, status, args)"/>
+        </p:panel>
+
+    </h:form>
+    <p:spacer height="10" />
+
+    <p:separator />
+
+    <p:spacer height="10" />
+
+    <p:separator />
+
+
+
+</ui:define>
+</ui:composition>
+</h:body>
+</html>
